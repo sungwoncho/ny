@@ -20,6 +20,7 @@ repl() {
 
     ny_node *node = parse(&p);
     print_nodes(node);
+    free_nodes(node);
 
     linenoiseHistoryAdd(line);
   }

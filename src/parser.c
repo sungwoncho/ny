@@ -110,6 +110,25 @@ parse(parser *self) {
 }
 
 void
+free_nodes(ny_node *node) {
+  switch (node->type) {
+    case NY_NODE_BINOP:
+      free_nodes(((ny_node_binop *) node)->left);
+      free_nodes(((ny_node_binop *) node)->right);
+      free(node);
+      break;
+    case NY_NODE_INT:
+      free(node);
+      break;
+    case NY_NODE_FLOAT:
+      free(node);
+      break;
+    default:
+      break;
+  }
+}
+
+void
 init_parser(parser *self, lexer *lexer) {
   self->lexer = lexer;
   self->current_token = scan(lexer);

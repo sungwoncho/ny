@@ -15,5 +15,6 @@ static ny_node * factor(parser *self);
 
 void init_parser(parser *self, lexer *lexer);
 ny_node *parse(parser *self);
+void free_nodes(ny_node *node);
 
 #endif
