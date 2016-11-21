@@ -26,6 +26,7 @@ scan_number(lexer *self) {
       buf[i] = self->current_char;
       advance(self);
     } else if (self->current_char == '.' && !has_dot) {
+      printf("has_dot\n");
       has_dot = 1;
       buf[i] = self->current_char;
       advance(self);
@@ -39,10 +40,11 @@ scan_number(lexer *self) {
   }
 
   if (has_dot) {
-    return get_token(NY_FLOAT, buf);
+    printf("buf: %s\n", buf);
+    return ny_token_new(NY_TOKEN_FLOAT, strdup(buf)); // FIXME: leak
   }
 
-  return get_token(NY_INTEGER, buf);
+  return ny_token_new(NY_TOKEN_INT, strdup(buf)); // FIXME: leak
 }
 
 ny_token
@@ -57,22 +59,26 @@ scan(lexer *self) {
       return scan_number(self);
     }
     if (self->current_char == '+') {
-      return get_token(NY_PLUS, "+");
+      advance(self);
+      return ny_token_new(NY_TOKEN_PLUS, "+");
     }
     if (self->current_char == '-') {
-      return get_token(NY_MINUS, "-");
+      advance(self);
+      return ny_token_new(NY_TOKEN_MINUS, "-");
     }
     if (self->current_char == '*') {
-      return get_token(NY_MUL, "*");
+      advance(self);
+      return ny_token_new(NY_TOKEN_MUL, "*");
     }
     if (self->current_char == '/') {
-      return get_token(NY_DIV, "/");
+      advance(self);
+      return ny_token_new(NY_TOKEN_DIV, "/");
     }
 
     // TODO: if reached this point, error
   }
 
-  return get_token(NY_EOF, NULL);
+  return ny_token_new(NY_TOKEN_EOF, "EOF");
 }
 
 void

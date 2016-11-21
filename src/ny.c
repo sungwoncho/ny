@@ -2,21 +2,26 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "lexer.h"
+#include "parser.h"
 #include "token.h"
 #include "linenoise.h"
+#include "visitor.h"
 
 void
 repl() {
   lexer l;
+  parser p;
 
   char *line;
-  while ((line = linenoise("ny > ")) != NULL) {
+  while ((line = linenoise("ny> ")) != NULL) {
     l.text = line;
-    printf("line %s\n", line);
     init_lexer(&l);
+    init_parser(&p, &l);
 
-    ny_token tok = scan(&l);
-    inspect_token(&tok);
+    ny_node *node = parse(&p);
+    print_nodes(node);
+
+    linenoiseHistoryAdd(line);
   }
   free(line);
 }

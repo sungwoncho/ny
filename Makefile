@@ -5,19 +5,17 @@ CFLAGS = -std=c99
 CFLAGS += -I deps/linenoise
 CFLAGS += -I src
 
-SOURCE = src/ny.c
-TARGET = ny
-
 SRC = $(wildcard src/*.c)
 OBJ = $(SRC:.c=.o)
 OBJ += deps/linenoise/linenoise.o
 OUT = ny
 
 $(OUT): $(OBJ)
-	$(CC) $^ -o $@
+	@$(CC) $^ -o $@
 
 %.o: %.c
-	$(CC) -c ${CFLAGS} $< -o $@
+	@$(CC) -c ${CFLAGS} $< -o $@
+	@printf "\033[0;32mCC\e[0m %s\n" $@
 
 clean:
-	rm -f $(OBJ)
+	@rm -f $(OBJ)

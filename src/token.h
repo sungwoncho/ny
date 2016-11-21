@@ -2,7 +2,7 @@
 #define NY_TOKEN_H
 
 #define NY_TOKEN_LIST \
-  X(INTEGER, "Integer") \
+  X(INT, "Int") \
   X(FLOAT, "Float") \
   X(PLUS, "Plus") \
   X(MINUS, "Minus") \
@@ -12,13 +12,13 @@
 
 
 typedef enum {
-  #define X(enum, str) NY_##enum,
+  #define X(num, str) NY_TOKEN_##num,
   NY_TOKEN_LIST
   #undef X
 } ny_token_type;
 
 static char *ny_token_type_strings[] = {
-  #define X(enum, str) str,
+  #define X(num, str) str,
   NY_TOKEN_LIST
   #undef X
 };
@@ -30,8 +30,8 @@ typedef struct {
 
 void inspect_token(ny_token *tok);
 
-static const char *get_token_type_string(ny_token *tok);
+const char *get_token_type_string(ny_token *tok);
 
-ny_token get_token(ny_token_type type, char *val);
+ny_token ny_token_new(ny_token_type type, char *val);
 
 #endif

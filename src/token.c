@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <string.h>
 #include "token.h"
 
 void
@@ -9,7 +10,7 @@ inspect_token(ny_token *tok) {
 }
 
 ny_token
-get_token(ny_token_type type, char *val) {
+ny_token_new(ny_token_type type, char *val) {
   ny_token tok;
 
   tok.type = type;
@@ -18,7 +19,7 @@ get_token(ny_token_type type, char *val) {
   return tok;
 }
 
-static const char *
+const char *
 get_token_type_string(ny_token *tok) {
   return ny_token_type_strings[tok->type];
 }
