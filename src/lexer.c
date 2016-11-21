@@ -74,6 +74,14 @@ scan(lexer *self) {
       advance(self);
       return ny_token_new(NY_TOKEN_DIV, "/");
     }
+    if (self->current_char == '(') {
+      advance(self);
+      return ny_token_new(NY_TOKEN_LPAREN, "(");
+    }
+    if (self->current_char == ')') {
+      advance(self);
+      return ny_token_new(NY_TOKEN_RPAREN, ")");
+    }
 
     // TODO: if reached this point, error
   }

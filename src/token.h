@@ -8,6 +8,8 @@
   X(MINUS, "Minus") \
   X(MUL, "Mul") \
   X(DIV, "Div") \
+  X(LPAREN, "LPAREN") \
+  X(RPAREN, "RPAREN") \
   X(EOF, "EOF")
 
 

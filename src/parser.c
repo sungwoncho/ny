@@ -72,6 +72,7 @@ term(parser *self) {
 /**
  * factor : INTEGER
           | FLOAT
+          | LPAREN expr RPAREN
  */
 static ny_node *
 factor(parser *self) {
@@ -85,6 +86,10 @@ factor(parser *self) {
       ret = (ny_node *) ny_node_float_new(atof(self->current_token.val));
       eat(self, NY_TOKEN_FLOAT);
       break;
+    case NY_TOKEN_LPAREN:
+      eat(self, NY_TOKEN_LPAREN);
+      ret = expression(self);
+      eat(self, NY_TOKEN_RPAREN);
     default:
       break;
   }

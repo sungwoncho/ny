@@ -21,7 +21,10 @@ visit_float(visitor *self, ny_node_float *node) {
 void
 visit_binop(visitor *self, ny_node_binop *node) {
   printf("%s", node->op.val);
+
+  printf("\nleft:\n");
   visit_node(self, node->left);
+  printf("\nright:\n");
   visit_node(self, node->right);
 }
 
