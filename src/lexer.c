@@ -54,6 +54,13 @@ scan(lexer *self) {
       advance(self);
     }
 
+    // Skip comment
+    if (self->current_char == '#') {
+      do {
+        advance(self);
+      } while (self->current_char != '\0' || self->current_char == '\n');
+    }
+
     if (isdigit(self->current_char)) {
       return scan_number(self);
     }
