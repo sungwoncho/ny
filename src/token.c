@@ -9,6 +9,7 @@ inspect_token(ny_token *tok) {
   printf("Token(%s, %s)\n", type, tok->val);
 }
 
+// IDEA: do I need to free ny_token?
 ny_token
 ny_token_new(ny_token_type type, char *val) {
   ny_token tok;

@@ -33,6 +33,17 @@ ny_node_binop_new(ny_token tok, ny_node *left, ny_node *right) {
   return node;
 }
 
+ny_node_unaryop *
+ny_node_unary_op_new(ny_token tok, ny_node *factor) {
+  ny_node_unaryop *node = malloc(sizeof(ny_node_unaryop));
+
+  node->base.type = NY_NODE_UNARYOP;
+  node->op = tok;
+  node->factor = factor;
+
+  return node;
+}
+
 const char *
 get_node_type_string(ny_node *node) {
   return ny_node_type_strings[node->type];

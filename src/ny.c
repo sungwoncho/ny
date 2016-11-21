@@ -5,7 +5,7 @@
 #include "parser.h"
 #include "token.h"
 #include "linenoise.h"
-#include "visitor.h"
+#include "print_ast.h"
 
 void
 repl() {
@@ -19,7 +19,7 @@ repl() {
     init_parser(&p, &l);
 
     ny_node *node = parse(&p);
-    print_nodes(node);
+    print_tree(node);
     free_nodes(node);
 
     linenoiseHistoryAdd(line);

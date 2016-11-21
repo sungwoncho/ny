@@ -72,19 +72,30 @@ term(parser *self) {
 /**
  * factor : INTEGER
           | FLOAT
+          | PLUS factor
+          | MINUS factor
           | LPAREN expr RPAREN
  */
 static ny_node *
 factor(parser *self) {
   ny_node *ret;
-  switch (self->current_token.type) {
+  ny_token current_token = self->current_token;
+  switch (current_token.type) {
     case NY_TOKEN_INT:
-      ret = (ny_node *) ny_node_int_new(atoi(self->current_token.val));
+      ret = (ny_node *) ny_node_int_new(atoi(current_token.val));
       eat(self, NY_TOKEN_INT);
       break;
     case NY_TOKEN_FLOAT:
-      ret = (ny_node *) ny_node_float_new(atof(self->current_token.val));
+      ret = (ny_node *) ny_node_float_new(atof(current_token.val));
       eat(self, NY_TOKEN_FLOAT);
+      break;
+    case NY_TOKEN_PLUS:
+      eat(self, NY_TOKEN_PLUS);
+      ret = (ny_node *) ny_node_unary_op_new(current_token, factor(self));
+      break;
+    case NY_TOKEN_MINUS:
+      eat(self, NY_TOKEN_MINUS);
+      ret = (ny_node *) ny_node_unary_op_new(current_token, factor(self));
       break;
     case NY_TOKEN_LPAREN:
       eat(self, NY_TOKEN_LPAREN);

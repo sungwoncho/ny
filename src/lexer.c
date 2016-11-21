@@ -40,7 +40,6 @@ scan_number(lexer *self) {
   }
 
   if (has_dot) {
-    printf("buf: %s\n", buf);
     return ny_token_new(NY_TOKEN_FLOAT, strdup(buf)); // FIXME: leak
   }
 
