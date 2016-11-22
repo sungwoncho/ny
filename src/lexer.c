@@ -96,7 +96,8 @@ scan(lexer *self) {
 }
 
 void
-init_lexer(lexer *self) {
+init_lexer(lexer *self, char *text) {
   self->pos = 0;
+  self->text = text;
   self->current_char = self->text[0];
 }

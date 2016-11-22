@@ -11,6 +11,6 @@ typedef struct {
 } lexer;
 
 ny_token scan(lexer *self);
-void init_lexer(lexer *self);
+void init_lexer(lexer *self, char *text);
 
 #endif
