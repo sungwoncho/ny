@@ -8,6 +8,8 @@
 static void
 eat(parser *self, ny_token_type token_type) {
   if (self->current_token.type == token_type) {
+    free(self->current_token.val);
+
     self->current_token = scan(self->lexer);
   } else {
     printf("Error: token mismatch. %s - %s\n", ny_token_type_strings[token_type], get_token_type_string(&self->current_token));

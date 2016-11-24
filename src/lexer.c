@@ -40,10 +40,10 @@ scan_number(lexer *self) {
   }
 
   if (has_dot) {
-    return ny_token_new(NY_TOKEN_FLOAT, strdup(buf)); // FIXME: leak
+    return ny_token_new(NY_TOKEN_FLOAT, buf);
   }
 
-  return ny_token_new(NY_TOKEN_INT, strdup(buf)); // FIXME: leak
+  return ny_token_new(NY_TOKEN_INT, buf);
 }
 
 ny_token
