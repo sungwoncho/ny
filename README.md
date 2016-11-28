@@ -16,6 +16,7 @@ Run `make`.
 
 ## Ideas
 
+
 ### function
 
 ```
@@ -147,6 +148,15 @@ def (a Animal, x int, y int)
 fn (a Animal, x int, y int)
   # ...
 ```
+
+Defining a new instance can be done as follows:
+
+```
+buddy = Dog{age: 1, name: "buddy"}
+```
+
+Note that there is no need to specify the type on the L-value. The type is inferred
+from the R-value.
 
 ### Type conversion
 
