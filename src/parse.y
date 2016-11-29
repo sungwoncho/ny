@@ -34,22 +34,22 @@ expr:
 int
 yylex (void)
 {
-  int c;
-
-while ((c = getchar()) == ' ' || c == '\t')
-  continue;
-
-if (c == '.' || isdigit(c))
-  {
-    ungetc(c, stdin);
-    scanf("%lf", &yylval);
-    return tINT;
-  }
-
-  if (c == EOF)
-    return 0;
-
-  return c;
+//   int c;
+//
+// while ((c = getchar()) == ' ' || c == '\t')
+//   continue;
+//
+// if (c == '.' || isdigit(c))
+//   {
+//     ungetc(c, stdin);
+//     scanf("%lf", &yylval);
+//     return tINT;
+//   }
+//
+//   if (c == EOF)
+//     return 0;
+//
+//   return c;
 }
 
 void
