@@ -1,30 +1,20 @@
 // nyc baby
 #include <stdio.h>
 #include <stdlib.h>
-#include "lexer.h"
-#include "parser.h"
-#include "token.h"
 #include "linenoise.h"
 #include "print_ast.h"
 #include "utils.h"
+#include "node.h"
+#include "parse.tab.h"
 
 void
 repl() {
-  lexer l;
-  parser p;
+  yyparse();
 
-  char *line;
-  while ((line = linenoise("ny> ")) != NULL) {
-    init_lexer(&l, line);
-    init_parser(&p, &l);
-
-    ny_node *node = parse(&p);
-    print_tree(node);
-    free_nodes(node);
-
-    linenoiseHistoryAdd(line);
-  }
-  free(line);
+  // char *line;
+  // while ((line = linenoise("ny> ")) != NULL) {
+  // }
+  // free(line);
 }
 
 /**
@@ -32,18 +22,18 @@ repl() {
  */
 int
 eval(char *source) {
-  lexer l;
-  parser p;
-
-  init_lexer(&l, source);
-  init_parser(&p, &l);
-
-  ny_node *node = parse(&p);
-  print_tree(node);
-  free_nodes(node);
-  free(source);
-
-  return 0;
+  // lexer l;
+  // parser p;
+  //
+  // init_lexer(&l, source);
+  // init_parser(&p, &l);
+  //
+  // ny_node *node = parse(&p);
+  // print_tree(node);
+  // free_nodes(node);
+  // free(source);
+  //
+  // return 0;
 }
 
 /**
