@@ -10,6 +10,12 @@ ny is a programming language.
 - [ ] Interpreter
 
 
+## Dependency
+
+* Bison
+* Flex
+* Clang
+
 ## Build
 
 Run `make`.
