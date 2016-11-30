@@ -2,4 +2,6 @@
 *.swp
 *.tab.c
 *.tab.h
+*.yy.c
+*.yy.h
 /bin

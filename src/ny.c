@@ -5,16 +5,15 @@
 #include "print_ast.h"
 #include "utils.h"
 #include "node.h"
+#include "exec.h"
 #include "parse.tab.h"
 
 void
 repl() {
-  yyparse();
+  parser_state state;
 
-  // char *line;
-  // while ((line = linenoise("ny> ")) != NULL) {
-  // }
-  // free(line);
+  yyparse(&state);
+  node_run(&state);
 }
 
 /**

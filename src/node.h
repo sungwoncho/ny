@@ -11,6 +11,11 @@ typedef enum {
 #define NODE_HEADER node_type type
 
 typedef struct {
+  void *lval;
+  int lineno;
+} parser_state;
+
+typedef struct {
   NODE_HEADER;
 } node;
 
@@ -41,5 +46,6 @@ node *node_binop_new(const char *op, node *lhs, node *rhs);
 node *node_int_new(int val);
 node *node_float_new(float val);
 void node_free(node *np);
+void inspect_node(node *np);
 
 #endif

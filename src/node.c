@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 #include "node.h"
@@ -48,6 +49,23 @@ node_free(node *np) {
       break;
     case NODE_UNARYOP:
       //TODO
+      break;
+  }
+}
+
+void
+inspect_node(node *np) {
+  switch (np->type) {
+    case NODE_BINOP:
+      printf("(BINOP) %s\n", ((node_binop *)np)->op);
+      break;
+    case NODE_INT:
+      printf("(INT) %d\n", ((node_int *)np)->val);
+      break;
+    case NODE_FLOAT:
+      printf("(INT) %f\n", ((node_float *)np)->val);
+      break;
+    default:
       break;
   }
 }
