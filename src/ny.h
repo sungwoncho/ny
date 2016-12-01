@@ -8,5 +8,7 @@
 #include "node.h"
 #include "number.h"
 
+#define NY_OK 0
+#define NY_ERROR 1
 
 #endif

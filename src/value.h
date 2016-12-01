@@ -19,6 +19,8 @@ typedef uint64_t ny_value;
 
 ny_value ny_int_value(int32_t i);
 int32_t ny_value_int(ny_value v);
-static inline int32_t ny_to_int(ny_value v);
+double ny_value_float(ny_value v);
+ny_value ny_float_value(double f);
+int ny_int_p(ny_value);
 
 #endif

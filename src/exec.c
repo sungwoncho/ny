@@ -1,17 +1,27 @@
 #include "exec.h"
+#include "number.h"
 #include <string.h>
+
+// debug flag
+#define DEBUG 0
 
 int
 node_run(parser_state *p) {
   int status;
   ny_value v;
 
-  print_node((node*)p->lval, 0);
-  return 0;
+  if (DEBUG) {
+    print_node((node*)p->lval, 0);
+    return NY_OK;
+  }
 
-  // status = exec_node((node*)p->lval, &v);
-  // printf("result %llu\n", v);
-  // return status;
+  status = exec_node((node*)p->lval, &v);
+  if (ny_int_p(v)) {
+    printf("result %d\n", ny_value_int(v));
+  } else {
+    printf("result %f\n", ny_value_float(v));
+  }
+  return status;
 }
 
 static void
@@ -58,14 +68,13 @@ exec_node(node *np, ny_value *val) {
         if (n) return n;
 
         if (strcmp(nbinop->op, "+") == 0) {
-          printf("%d + %d\n", ny_value_int(args[0]), ny_value_int(args[1]));
-          *val = ny_value_int(args[0]) + ny_value_int(args[1]);
+          num_plus(&args[0], &args[1], val);
         } else if ((strcmp(nbinop->op, "-") == 0)) {
-          *val = ny_value_int(args[0]) - ny_value_int(args[1]);
+          num_minus(&args[0], &args[1], val);
         } else if ((strcmp(nbinop->op, "*") == 0)) {
-          *val = ny_value_int(args[0]) * ny_value_int(args[1]);
+          num_mul(&args[0], &args[1], val);
         } else if ((strcmp(nbinop->op, "/") == 0)) {
-          *val = ny_value_int(args[0]) / ny_value_int(args[1]); // TODO: return float
+          num_div(&args[0], &args[1], val);
         }
         return NY_OK;
       } break;
@@ -76,7 +85,7 @@ exec_node(node *np, ny_value *val) {
       } break;
     case NODE_FLOAT:
       {
-        // TODO: float
+        *val = ny_float_value(((node_float*)np)->val);
         return NY_OK;
       } break;
     default:
