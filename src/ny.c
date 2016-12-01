@@ -1,11 +1,5 @@
 // nyc baby
-#include <stdio.h>
-#include <stdlib.h>
-#include "linenoise.h"
-#include "print_ast.h"
-#include "utils.h"
-#include "node.h"
-#include "exec.h"
+#include "ny.h"
 #include "parse.tab.h"
 
 void
@@ -53,4 +47,9 @@ main(int argc, char const *argv[]) {
     source = read_file(path);
     return eval(source);
   }
+}
+
+void
+ny_init() {
+  ny_number_init();
 }

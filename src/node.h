@@ -1,14 +1,14 @@
 #ifndef _NODE_H
 #define _NODE_H
 
+#define NODE_HEADER node_type type
+
 typedef enum {
   NODE_INT,
   NODE_FLOAT,
   NODE_BINOP,
-  NODE_UNARYOP
+  NODE_UNARYOP,
 } node_type;
-
-#define NODE_HEADER node_type type
 
 typedef struct {
   void *lval;

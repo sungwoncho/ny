@@ -8,7 +8,7 @@ node_binop_new(const char *op, node *lhs, node *rhs) {
   node_binop *nbinop = malloc(sizeof(node_binop));
 
   nbinop->type = NODE_BINOP;
-  nbinop->op = strdup(op);
+  nbinop->op = strdup(op); // FIXME: leak
   nbinop->lhs = lhs;
   nbinop->rhs = rhs;
 

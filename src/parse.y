@@ -12,7 +12,10 @@
   node *nd;
 }
 
+%type <nd> factor
+%type <nd> term
 %type <nd> expr
+
 %pure-parser
 %parse-param {parser_state *p}
 %lex-param {p}
@@ -44,18 +47,34 @@ program:
 ;
 
 expr:
+    term tPLUS expr   {
+      $$ = node_binop_new("+", $1, $3);
+    }
+|   term tMINUS expr   {
+      $$ = node_binop_new("-", $1, $3);
+    }
+|   term
+;
+
+term:
+    factor tMUL term {
+      $$ = node_binop_new("*", $1, $3);
+    }
+|   factor tDIV term {
+      $$ = node_binop_new("/", $1, $3);
+    }
+|   factor
+
+factor:
     tINT   {
       $$ = $1;
     }
-|   tFLOAT   { $$ = $1; }
-|   expr tPLUS expr   { $$ = node_binop_new("+", $1, $3); }
-|   expr tMINUS expr   {
-      $$ = node_binop_new("-", $1, $3);
+|   tFLOAT   {
+      $$ = $1;
     }
-|   expr tMUL expr   { $$ = node_binop_new("*", $1, $3); }
-|   expr tDIV expr   { $$ = node_binop_new("/", $1, $3); }
-|   tLPAREN expr tRPAREN   { $$ = $2; }
-;
+|   tLPAREN expr tRPAREN   {
+      $$ = $2;
+    }
 %%
 
 
