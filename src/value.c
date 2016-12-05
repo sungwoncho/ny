@@ -2,7 +2,7 @@
 
 static inline int32_t
 ny_to_int(ny_value v) {
-  return (int32_t)(v & ~NY_TAG_MASK);
+  return (int32_t)(v & NY_VAL_MASK);
 }
 
 static inline double
@@ -21,9 +21,16 @@ ny_int_p(ny_value v) {
   return ny_value_tag(v) == NY_TAG_INT;
 }
 
-// int
-// ny_float_p(ny_value v) {
-// }
+int
+ny_float_p(ny_value v) {
+  // nan or +inf or -inf
+  return v == NY_TAG_NAN || (v & NY_TAG_NAN) != NY_TAG_NAN;
+}
+
+int
+ny_number_p(ny_value v) {
+  return ny_int_p(v) || ny_float_p(v);
+}
 
 int32_t
 ny_value_int(ny_value v) {
@@ -56,5 +63,12 @@ ny_float_value(double f) {
 
 double
 ny_value_float(ny_value v) {
-  return ny_to_float(v);
+  if (ny_int_p(v)) {
+    return (double)ny_value_int(v);
+  } else if (ny_float_p(v)) {
+    return ny_to_float(v);
+  }
+
+  // Should not be reached
+  return 0.0;
 }

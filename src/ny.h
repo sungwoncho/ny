@@ -6,6 +6,7 @@
 #include "print_ast.h"
 #include "utils.h"
 #include "node.h"
+#include "exec.h"
 #include "number.h"
 
 #define NY_OK 0
